@@ -1,0 +1,23 @@
+<div ng-controller='HomeController as homeController'>
+
+  <div class='top'>
+    <h1>LolStat</h1>
+    <form class='searchInput' ng-submit='enter()' method='post'>
+      <input class='searchBar' type='text' ng-model='summoner.IGN' placeholder="Enter the Summoner's name"/>
+    </form>
+    <button type="button" name="button" ng-click='clear()'>clear</button>
+  </div>
+
+  <!-- <div class='container gameStatsHold'>
+    <div class='gameStats' ng-repeat='(key, userData) in data.summonerData.playerStatSummaries'>
+      <div>
+        <h1>{{userData.playerStatSummaryType}}</h1>
+        <div ng-repeat='(key, userStats) in userData.aggregatedStats '>
+          <p>{{key}}:
+            {{userStats}}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>

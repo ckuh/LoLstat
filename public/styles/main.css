@@ -1,0 +1,64 @@
+/*body {
+  margin: 0;
+  font-family: arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.top {
+  height: 120px;
+  padding: 15px;
+  background-color: #229ee4;
+}
+
+.top h1{
+  color: white;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-shadow: 3px 4px 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.searchInput{
+  position: relative;
+  display: block;
+  max-width: 452px;
+  margin: 0 auto auto;
+}
+
+.searchBar{
+  color: black;
+  border-radius: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+  font-size: 20px;
+  padding: 10px 30px 10px 30px;
+  height: 18px;
+  width: 387px;
+}
+
+.container{
+  width: 1035px;
+  margin: auto;
+  padding: 5px;
+}
+
+.gameStatsHold h1{
+  text-align: center;
+}
+
+.gameStats{
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /*text-overflow: ellipsis; */
+  /*white-space: nowrap;*/
+  height: 300px;
+  width: 300px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  /*float: left;*/
+  margin: 10px;
+  padding: 10px;
+  /*position: relative;*/
+}*/
