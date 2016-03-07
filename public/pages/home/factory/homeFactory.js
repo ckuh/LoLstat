@@ -1,7 +1,11 @@
 angular.module('homeFactory', [])
-  .factory('homeFactory', function($location, $http, $state) {
+  .factory('homeFactory', function($state, $localStorage) {
     var service = {
-
+      saveSummonerIGN: saveSummonerIGN
     }
     return service;
+
+    function saveSummonerIGN(summonerIGN) {
+      $localStorage.summonerIGN = summonerIGN;
+    }
   })

@@ -1,17 +1,64 @@
-var riot = require('../../node_modules/riot-games-api-nodejs/lib/riot-games-api-nodejs.js')
+module.exports = {
+  summonerName: function(riot, userName, callback) {
+    getSummonerInfo(riot, userName, function(err, summonerInfo) {
+      if (err) {
+        console.error(err);
+        callback(summonerInfo);
+      } else {
+        callback(summonerInfo);
+      }
+    })
+  },
 
-var pathParam = {
-    championId : "21",
-    freeToPlay : "true",
-    summonerId : '30023541',
-    summonerName : 'kuhkoo',
-    type : 'RANKED_SOLO_5X5'
+  statsSummary: function(riot, userName, callback) {
+    console.log('+++line3 userName: ', userName);
+    getSummonerInfo(riot, userName, function(err, summonerInfo) {
+      if (err) {
+        console.error(err);
+        callback(summonerInfo);
+      } else {
+        riot.stats.summary(summonerInfo.id, {}, function(err, data) {
+          if (err) {
+            console.error(err);
+            callback(JSON.parse(data).status);
+          } else {
+            callback(data);
+          }
+        });
+      }
+    });
+  },
+
+  statsRanked: function(riot, userName, callback) {
+    getSummonerInfo(riot, userName, function(err, summonerInfo) {
+      if (err) {
+        console.error(err);
+        callback(summonerInfo);
+      } else {
+        riot.stats.ranked(summonerInfo.id, {
+          season: 'SEASON4'
+        }, function(err, data) {
+          if (err) {
+            console.error(err);
+            callback(JSON.parse(data).status);
+          } else {
+            console.log(data);
+            callback(data);
+          }
+        })
+      }
+    })
+  }
 }
 
-riot.developerKey = config.api_key;
-
-riot.settings = {
-  region: 'na'
+function getSummonerInfo(riot, userName, callback) {
+  console.log(userName);
+  riot.summoner.byName(userName, {}, function(err, data) {
+    if (err) {
+      console.error(err);
+      callback(err, JSON.parse(data).status);
+    } else {
+      callback(err, data[userName]);
+    }
+  });
 }
-
-//{"kuhkoo":{"id":30023541,"name":"kuhkoo","profileIconId":962,"summonerLevel":30,"revisionDate":1451893879000}}
