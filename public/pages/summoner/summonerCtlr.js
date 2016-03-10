@@ -10,6 +10,11 @@ angular.module('App')
       'Stats Summary',
       'Stats Ranked'
     ];
+    vm.gameStats = {
+      summary: false,
+      ranked: false
+    }
+
     vm.status = {
       isopen: false
     };
@@ -29,10 +34,14 @@ angular.module('App')
 
     vm.statPick = function(choice) {
       if (choice === vm.statChoice[0]) {
+        vm.gameStats.summary = true;
+        vm.gameStats.ranked = false;
         vm.getUserStatsSummary();
       }
 
       if (choice === vm.statChoice[1]) {
+        vm.gameStats.summary = false;
+        vm.gameStats.ranked = true;
         vm.getUserStatsRanked();
       }
     }
