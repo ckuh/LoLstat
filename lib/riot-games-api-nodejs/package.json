@@ -1,0 +1,84 @@
+{
+  "_args": [
+    [
+      "riot-games-api-nodejs",
+      "/Users/stevekuh/Desktop/makersquare/projects/LoLstat"
+    ]
+  ],
+  "_from": "riot-games-api-nodejs@*",
+  "_id": "riot-games-api-nodejs@1.0.6",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/riot-games-api-nodejs",
+  "_npmUser": {
+    "email": "thehardtacos@gmail.com",
+    "name": "hardtacos"
+  },
+  "_npmVersion": "1.4.28",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "riot-games-api-nodejs",
+    "raw": "riot-games-api-nodejs",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/riot-games-api-nodejs/-/riot-games-api-nodejs-1.0.6.tgz",
+  "_shasum": "64137720f3d92bfe18e18c640e480af2bc8c3267",
+  "_shrinkwrap": null,
+  "_spec": "riot-games-api-nodejs",
+  "_where": "/Users/stevekuh/Desktop/makersquare/projects/LoLstat",
+  "author": {
+    "email": "thehardtacos@gmail.com",
+    "name": "Patrick McHugh"
+  },
+  "bugs": {
+    "url": "https://github.com/hardtacos/riot-games-api-nodejs/issues"
+  },
+  "dependencies": {
+    "node-xml2json": "1.x.x"
+  },
+  "description": "Access Riot Games API with ease.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "64137720f3d92bfe18e18c640e480af2bc8c3267",
+    "tarball": "http://registry.npmjs.org/riot-games-api-nodejs/-/riot-games-api-nodejs-1.0.6.tgz"
+  },
+  "gitHead": "1c7b3685c9540c990e63a93c949b6c931bd3882d",
+  "homepage": "https://github.com/HardTacos/riot-games-api-nodejs",
+  "keywords": [
+    "api",
+    "champions",
+    "games",
+    "history",
+    "league",
+    "legends",
+    "match",
+    "of",
+    "reference",
+    "riot",
+    "rito"
+  ],
+  "license": "MIT",
+  "main": "app.js",
+  "maintainers": [
+    {
+      "name": "hardtacos",
+      "email": "thehardtacos@gmail.com"
+    }
+  ],
+  "name": "riot-games-api-nodejs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HardTacos/riot-games-api-nodejs.git"
+  },
+  "scripts": {},
+  "version": "1.0.6"
+}

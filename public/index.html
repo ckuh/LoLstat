@@ -21,10 +21,10 @@
   <body ng-app="App">
     <div ng-controller='HomeController as homeController'>
 
-      <div class='top'>
+      <div class='container-fluid top'>
         <h1>LolStat</h1>
         <form class='searchInput' ng-submit='homeController.saveSummonerIGN()'>
-          <div class="searchField">
+          <div class="container-fluid">
             <div class="btn-group" uib-dropdown is-open="status.isopen">
               <button id="region" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 {{homeController.summoner.region}}

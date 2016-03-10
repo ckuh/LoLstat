@@ -3,48 +3,50 @@ body {
   font-family: arial, sans-serif;
   background-color: rgba(0, 0, 0, 0.08);
 }
-
+.nav {
+  font-size: 20px;
+}
 .top {
-  height: 120px;
+  height: 150px;
   padding: 15px;
   background-color: #229ee4;
 }
-
-.top h1{
+.top h1 {
   color: white;
   margin-top: 0px;
   margin-bottom: 20px;
   text-shadow: 3px 4px 3px rgba(0, 0, 0, 0.6);
   text-align: center;
 }
-
-.searchField {
+.searchInput {
   margin: 0 auto;
+  width: 420px;
 }
-
-.searchInput{
-  width: 80%;
-  margin: 0 auto;
-}
-
-.searchBar{
-  position: relative;
-  border-radius: 4px;
+.searchBar {
   font-size: 20px;
-  width: 320px;
+  width: 300px;
 }
-
-.container{
+.summonerName{
+  margin-top: 15px;
+  font-size: 36px;
+}
+.summonerName p{
+  font-size: 20px;
+}
+.summonerName img{
+  float: left;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+.container {
   width: 1035px;
   margin: auto;
   padding: 5px;
 }
-
-.gameStatsHold h1{
-  text-align: center;
+.gameStatsHold {
+  width: 430px;
 }
-
-.gameStats{
+.gameStats {
   border-radius: 5px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
   text-align: center;
@@ -61,14 +63,21 @@ body {
   padding: 10px;
   /*position: relative;*/
 }
-
 #region {
   min-width: 80px;
   text-align: center;
 }
+@media (min-width: 430px) {
+  .gameStatsHold {
+    width: 100%;
+  }
+}
 
-@media (min-width: 555px) {
-  .searchBar{
+@media (min-width: 600px) {
+  .searchBar {
+    width: 80%;
+  }
+  .searchInput {
     width: 80%;
   }
 }

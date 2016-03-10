@@ -15,6 +15,12 @@ module.exports = function(io) {
       })
     })
 
+    socket.on('summonerLeague', function(userName) {
+      getUserDataHelper.summonerLeague(riot, setUserName(userName), function(data) {
+        io.emit('summonerLeague', data);
+      })
+    })
+
     socket.on('statsSummary', function(userName) {
       getUserDataHelper.statsSummary(riot, setUserName(userName), function(data) {
         io.emit('statsSummary', data);

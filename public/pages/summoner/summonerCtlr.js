@@ -4,11 +4,13 @@ angular.module('App')
     vm.socket = io();
     vm.summoner = {};
     vm.statSummary = {};
+    vm.statRanked = {};
     vm.championList = {};
+    vm.stat = 'Stat';
     vm.summoner.IGN = '';
     vm.statChoice = [
-      'Stats Summary',
-      'Stats Ranked'
+      'Summary',
+      'Ranked'
     ];
     vm.gameStats = {
       summary: false,
@@ -25,29 +27,25 @@ angular.module('App')
       vm.getChampName();
     }
 
-    vm.toggleStatChoice = function($event) {
-      debugger;
-      $event.preventDefault();
-      $event.stopPropagation();
-      vm.status.isopen = !vm.status.isopen;
-    };
-
     vm.statPick = function(choice) {
       if (choice === vm.statChoice[0]) {
         vm.gameStats.summary = true;
         vm.gameStats.ranked = false;
+        vm.stat = vm.statChoice[0];
         vm.getUserStatsSummary();
       }
 
       if (choice === vm.statChoice[1]) {
         vm.gameStats.summary = false;
         vm.gameStats.ranked = true;
+        vm.stat = vm.statChoice[1];
         vm.getUserStatsRanked();
       }
     }
 
     vm.getUserInfo = function() {
       vm.socket.emit('summonerName', vm.summonerIGN);
+      vm.socket.emit('summonerLeague', vm.summonerIGN);
     }
 
     vm.getChampName = function() {
@@ -81,8 +79,14 @@ angular.module('App')
       })
     })
 
+    vm.socket.on('summonerLeague', function(data) {
+      $scope.$apply(function() {
+        console.log(data);
+      })
+    })
+
     vm.socket.on('champName', function(data) {
-      console.log('champList: ', data);
+      console.log('championList: ', data);
       $scope.$apply(function() {
         for (var key in data) {
           vm.championList[data[key].id] = data[key];
@@ -98,8 +102,8 @@ angular.module('App')
 
     vm.socket.on('statsRanked', function(data) {
       $scope.$apply(function() {
-        // vm.statSummary = sortStats(data.playerStatSummaries);
-        console.log(data)
+        console.log('statsRanked: ', data.champions);
+        vm.statRanked = data.champions;
       })
     })
 
