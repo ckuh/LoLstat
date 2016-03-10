@@ -3,7 +3,21 @@
   <div class='top'>
     <h1>LolStat</h1>
     <form class='searchInput' ng-submit='homeController.saveSummonerIGN()'>
-      <input class='' ng-model='homeController.summoner.IGN' placeholder="Enter the Summoner's name"/>
+      <div class="container-fluid">
+        <div class="btn-group" uib-dropdown is-open="status.isopen">
+          <button id="region" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+            {{homeController.summoner.region}}
+          </button>
+
+          <ul id="region" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li ng-repeat="choice in homeController.regionList">
+              <a href ng-click='homeController.summoner.region = choice'>{{choice}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <input class='searchBar' ng-model='homeController.summoner.IGN' placeholder="Enter the Summoner's name"/>
     </form>
   </div>
 

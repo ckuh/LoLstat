@@ -18,21 +18,20 @@ body {
   text-align: center;
 }
 
+.searchField {
+  margin: 0 auto;
+}
+
 .searchInput{
-  position: relative;
-  display: block;
-  max-width: 452px;
-  margin: 0 auto auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .searchBar{
-  color: black;
+  position: relative;
   border-radius: 4px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
   font-size: 20px;
-  padding: 10px 30px 10px 30px;
-  height: 18px;
-  width: 387px;
+  width: 320px;
 }
 
 .container{
@@ -61,4 +60,15 @@ body {
   margin: 10px;
   padding: 10px;
   /*position: relative;*/
+}
+
+#region {
+  min-width: 80px;
+  text-align: center;
+}
+
+@media (min-width: 555px) {
+  .searchBar{
+    width: 80%;
+  }
 }

@@ -1,9 +1,10 @@
 angular.module('App')
-  .controller('SummonerController', function($scope, $state, $localStorage, homeFactory) {
+  .controller('SummonerController', function($location, $scope, $state, $localStorage, homeFactory) {
     var vm = this;
     vm.socket = io();
     vm.summoner = {};
     vm.statSummary = {};
+    vm.championList = {};
     vm.summoner.IGN = '';
     vm.statChoice = [
       'Stats Summary',
@@ -16,6 +17,7 @@ angular.module('App')
     vm.init = function() {
       vm.summonerIGN = $localStorage.summonerIGN;
       vm.getUserInfo();
+      vm.getChampName();
     }
 
     vm.toggleStatChoice = function($event) {
@@ -37,6 +39,10 @@ angular.module('App')
 
     vm.getUserInfo = function() {
       vm.socket.emit('summonerName', vm.summonerIGN);
+    }
+
+    vm.getChampName = function() {
+      vm.socket.emit('champName')
     }
 
     vm.getUserStatsSummary = function() {
@@ -61,7 +67,16 @@ angular.module('App')
           vm.summoner = data;
           console.log(data);
         } else {
-          $state.go('home');
+          $location.path('/');
+        }
+      })
+    })
+
+    vm.socket.on('champName', function(data) {
+      console.log('champList: ', data);
+      $scope.$apply(function() {
+        for (var key in data) {
+          vm.championList[data[key].id] = data[key];
         }
       })
     })

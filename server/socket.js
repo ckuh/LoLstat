@@ -29,9 +29,16 @@ module.exports = function(io) {
         io.emit('statsRanked', data);
       })
     })
+
+    socket.on('champName', function() {
+      getChampDataHelper.champName(riot, function(data) {
+        io.emit('champName', data);
+      })
+    })
   })
 }
 
 function setUserName(userName) {
-  return userName.split(' ').join('');
+  userName = userName.split(' ').join('');
+  return userName.toLowerCase();
 }

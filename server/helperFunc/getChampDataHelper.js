@@ -8,5 +8,16 @@ module.exports = {
         callback(data);
       }
     });
+  },
+
+  champName: function(riot, callback) {
+    riot.staticData.champions({}, function(err, data) {
+      if (err) {
+        console.error(err);
+        callback(JSON.parse(data).status);
+      } else {
+        callback(data);
+      }
+    });
   }
 }
