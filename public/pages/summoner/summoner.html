@@ -3,22 +3,30 @@
   <div class='container-fluid gameStatsHold'>
 
     <div class='container-fluid summonerName'>
-        <img src="http://ddragon.leagueoflegends.com/cdn/6.5.1/img/profileicon/983.png"/>
+      <div class="summonerImgHolder">
+        <div class="summonerImg">
+          <img ng-src='https://ddragon.leagueoflegends.com/cdn/6.5.1/img/profileicon/{{summonerController.summoner.profileIconId}}.png'/>
+          <span>{{summonerController.summoner.summonerLevel}}</span>
+        </div>
+      </div>
         <div>
           {{summonerController.summoner.name}}
-          <p>Level: {{summonerController.summoner.summonerLevel}}</p>
+          <div>
+            <p>{{summonerController.summoner.ranked.name}}</p>
+            <p>{{summonerController.summoner.ranked.tier}} {{summonerController.summoner.ranked.entries[0].division}}</p>
+          </div>
         </div>
     </div>
     <div>
       <ul class='nav nav-tabs'>
         <li ng-repeat='choice in summonerController.statChoice'>
-          <a role='presentation' href class='active' ng-click='summonerController.statPick(choice)'>{{choice}}</a>
+          <a role='presentation' ng-click='summonerController.statPick(choice)'>{{choice}}</a>
         </li>
       </ul>
     </div>
 
-    <div class='container'>
-      <div class='gameStats' ng-show='summonerController.gameStats.summary' ng-repeat='(key, userData) in summonerController.statSummary'>
+    <div class='container-fluid'>
+      <div class='statSummary' ng-show='summonerController.gameStats.summary' ng-repeat='(key, userData) in summonerController.statSummary'>
         <h1>{{userData.playerStatSummaryType}}</h1>
         <div ng-repeat='(key, userStats) in userData.aggregatedStats'>
           <p>{{key}}:
@@ -27,14 +35,21 @@
       </div>
     </div>
 
-    <div class='container'>
-      <div ng-show='summonerController.gameStats.ranked' ng-repeat='userData in summonerController.statRanked'>
+    <div class='container-fluid statRanked'>
+      <ul class='nav nav-tabs' ng-show='summonerController.gameStats.ranked'>
+        <li ng-repeat='(key, season) in summonerController.seasonDisp' ng-class='summonerController.seasonShort[season]'>
+          <a role='presentation' ng-click='summonerController.seasonPick(season)'>{{season}}</a>
+        </li>
+      </ul>
+
+      <div class='champRankedInfo' ng-show='summonerController.gameStats.ranked' ng-repeat='userData in summonerController.statRanked'>
         <h1>{{summonerController.championList[userData.id].name}}</h1>
         <div ng-repeat='(key, champStats) in userData.stats'>
           {{key}}:
           {{champStats}}
         </div>
       </div>
+
     </div>
 
     <!-- <div class='champList' ng-repeat='(key, userData) in summonerController.championList'>

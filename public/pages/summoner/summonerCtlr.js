@@ -6,11 +6,23 @@ angular.module('App')
     vm.statSummary = {};
     vm.statRanked = {};
     vm.championList = {};
-    vm.stat = 'Stat';
+    vm.summonerIGN = {};
     vm.summoner.IGN = '';
     vm.statChoice = [
       'Summary',
       'Ranked'
+    ];
+    vm.seasonShort = {
+      'S6': 'active',
+      'S5': '',
+      'S4': '',
+      'S3': '',
+    }
+    vm.seasonDisp = [
+      'S6', 'S5', 'S4', 'S3'
+    ];
+    vm.season = [
+      'SEASON2016', 'SEASON2015', 'SEASON4', 'SEASON3'
     ];
     vm.gameStats = {
       summary: false,
@@ -22,9 +34,28 @@ angular.module('App')
     };
 
     vm.init = function() {
-      vm.summonerIGN = $localStorage.summonerIGN;
+      vm.summonerIGN.name = $localStorage.summonerIGN;
+      vm.summonerIGN.season = vm.season[0];
       vm.getUserInfo();
       vm.getChampName();
+    }
+
+    vm.seasonPick = function(choice) {
+      angular.forEach(vm.seasonShort, function(value, key) {
+        if(key === choice){
+          vm.seasonShort[key] = 'active';
+        }else{
+          vm.seasonShort[key] = '';
+        }
+      });
+
+      var result = findSeason(choice, vm.seasonDisp, vm.season)
+      if(vm.summonerIGN.season === result){
+        return
+      }else {
+        vm.summonerIGN.season = result;
+        vm.getUserStatsRanked();
+      }
     }
 
     vm.statPick = function(choice) {
@@ -44,8 +75,8 @@ angular.module('App')
     }
 
     vm.getUserInfo = function() {
-      vm.socket.emit('summonerName', vm.summonerIGN);
-      vm.socket.emit('summonerLeague', vm.summonerIGN);
+      vm.socket.emit('summonerName', vm.summonerIGN.name);
+      vm.socket.emit('summonerLeague', vm.summonerIGN.name);
     }
 
     vm.getChampName = function() {
@@ -53,7 +84,7 @@ angular.module('App')
     }
 
     vm.getUserStatsSummary = function() {
-      vm.socket.emit('statsSummary', vm.summonerIGN);
+      vm.socket.emit('statsSummary', vm.summonerIGN.name);
     }
 
     vm.getUserStatsRanked = function() {
@@ -74,14 +105,15 @@ angular.module('App')
           vm.summoner = data;
           console.log(data);
         } else {
-          $location.path('/');
+          $state.go('home');
         }
       })
     })
 
     vm.socket.on('summonerLeague', function(data) {
       $scope.$apply(function() {
-        console.log(data);
+        vm.summoner.ranked = data;
+        console.log(vm.summoner);
       })
     })
 
@@ -163,4 +195,21 @@ function sortStats(playerStat) {
   }
 
   return playerStat;
+}
+
+function findSeason(choice, seasonDisp, season) {
+  var result;
+  if (choice === seasonDisp[0]) {
+    result = season[0];
+  }
+  if (choice === seasonDisp[1]) {
+    result = season[1];
+  }
+  if (choice === seasonDisp[2]) {
+    result = season[2];
+  }
+  if (choice === seasonDisp[3]) {
+    result = season[3];
+  }
+  return result;
 }

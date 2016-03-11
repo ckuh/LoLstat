@@ -3,6 +3,9 @@ body {
   font-family: arial, sans-serif;
   background-color: rgba(0, 0, 0, 0.08);
 }
+.active a{
+  background-color: #ddd !important;
+}
 .nav {
   font-size: 20px;
 }
@@ -26,17 +29,31 @@ body {
   font-size: 20px;
   width: 300px;
 }
-.summonerName{
+.summonerName {
   margin-top: 15px;
   font-size: 36px;
 }
-.summonerName p{
-  font-size: 20px;
+.summonerName p {
+  font-size: 15px;
+  margin: 0;
 }
-.summonerName img{
+.summonerImgHolder {
+  overflow: auto;
   float: left;
   padding-right: 15px;
   padding-bottom: 15px;
+}
+.summonerImg {
+  position: relative;
+}
+.summonerImg span {
+  font-size: 20px;
+  padding: 0 4px;
+  background-color: black;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .container {
   width: 1035px;
@@ -46,7 +63,7 @@ body {
 .gameStatsHold {
   width: 430px;
 }
-.gameStats {
+.statSummary {
   border-radius: 5px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
   text-align: center;
@@ -63,6 +80,19 @@ body {
   padding: 10px;
   /*position: relative;*/
 }
+.statRanked {
+  padding-top: 15px;
+}
+.statRanked ul{
+  font-size: 15px;
+}
+.champRankedInfo{
+  padding: 15px 0;
+  background-color: #ddd;
+}
+.champRankedInfo h1{
+  margin-top: 0;
+}
 #region {
   min-width: 80px;
   text-align: center;
@@ -72,7 +102,6 @@ body {
     width: 100%;
   }
 }
-
 @media (min-width: 600px) {
   .searchBar {
     width: 80%;

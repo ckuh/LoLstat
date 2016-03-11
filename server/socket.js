@@ -27,8 +27,8 @@ module.exports = function(io) {
       })
     })
 
-    socket.on('statsRanked', function(userName) {
-      getUserDataHelper.statsRanked(riot, setUserName(userName), function(data) {
+    socket.on('statsRanked', function(userInfo) {
+      getUserDataHelper.statsRanked(riot, setUserName(userInfo.name), userInfo.season, function(data) {
         for (var i = 0; i < data.length; i++) {
 
         }
