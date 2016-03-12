@@ -75,7 +75,6 @@ body {
   /*float: left;*/
   margin: 10px;
   padding: 10px;
-  /*position: relative;*/
 }
 .statRanked {
   padding-top: 15px;
@@ -84,6 +83,11 @@ body {
 }
 .statRanked ul {
   font-size: 15px;
+}
+.champRankedInfoContainer {
+  height: 100px;
+  background-color: #fff !important;
+  position: relative;
 }
 .champRankedInfoTab {
   background-color: #ddd;
@@ -106,9 +110,11 @@ body {
 }
 .uniqChampTitle {
   padding: 15px 15px 15px 15px;
+  margin-bottom: 0;
 }
 .uniqChampTitle li {
   display: inline-block;
+  cursor: pointer;
   width: 9%;
 }
 .uniqChamp {

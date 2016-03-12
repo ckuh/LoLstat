@@ -1,7 +1,8 @@
 angular.module('App')
-  .controller('SummonerController', function($location, $scope, $state, $localStorage, homeFactory, summonerFactory) {
+  .controller('SummonerController', function($location, $scope, $state, $localStorage, $interval, homeFactory, summonerFactory) {
     var vm = this;
     vm.socket = io();
+    vm.spinner = true;
     vm.realm = {};
     vm.summoner = {};
     vm.statSummary = {};
@@ -102,6 +103,37 @@ angular.module('App')
       });
     }
 
+    vm.sortName = function() {
+      vm.statRanked.sort(compareName);
+    }
+
+    vm.sortGame = function() {
+      vm.statRanked.sort(compareGame);
+    }
+
+    vm.sortKill = function() {
+      vm.statRanked.sort(compareKill);
+    }
+
+    vm.sortDeath = function() {
+      vm.statRanked.sort(compareDeath);
+    }
+
+    vm.sortAssist = function() {
+      vm.statRanked.sort(compareAssist);
+    }
+
+    vm.sortKDA = function() {
+      vm.statRanked.sort(compareKDA);
+    }
+
+    vm.sortCS = function() {
+      vm.statRanked.sort(compareCS);
+    }
+
+    vm.sortGold = function() {
+      vm.statRanked.sort(compareGold);
+    }
     vm.socket.on('staticRealm', function(data) {
       $scope.$apply(function() {
         console.log('staticRealm: ', data);
@@ -143,13 +175,22 @@ angular.module('App')
     })
 
     vm.socket.on('statsRanked', function(data) {
-      if(data.champions) {
+      if (data.status_code === 429) {
         $scope.$apply(function() {
+          vm.spinner = true;
+        })
+        $interval(function () {
+          vm.getUserStatsRanked();
+        }, 800, 1);
+      }
+      if (data.champions) {
+        $scope.$apply(function() {
+          vm.spinner = false;
           console.log('statsRanked: ', data.champions);
           angular.forEach(data.champions, function(champ, key, arr) {
             if (champ.id === 0) {
               vm.totalWin = key;
-            }else{
+            } else {
               champ.key = vm.championList[champ.id].key;
               champ.name = vm.championList[champ.id].name;
               champ.stats.avgWin = (Math.round((champ.stats.totalSessionsWon / champ.stats.totalSessionsPlayed) * 100));
@@ -162,7 +203,7 @@ angular.module('App')
             }
           });
           data.champions.splice(vm.totalWin, 1);
-          vm.statRanked = data.champions.sort(compare);;
+          vm.statRanked = data.champions.sort(compareGame);
         })
       }
     })
@@ -242,10 +283,73 @@ function findSeason(choice, seasonDisp, season) {
   return result;
 }
 
-function compare(a, b) {
+function compareGame(a, b) {
+  if (a.stats.totalSessionsPlayed > b.stats.totalSessionsPlayed)
+    return -1;
+  else if (a.stats.totalSessionsPlayed < b.stats.totalSessionsPlayed)
+    return 1;
+  else
+    return 0;
+}
+
+function compareName(a, b) {
   if (a.name < b.name)
     return -1;
   else if (a.name > b.name)
+    return 1;
+  else
+    return 0;
+}
+
+function compareKill(a, b) {
+  if (a.stats.avgKill > b.stats.avgKill)
+    return -1;
+  else if (a.stats.avgKill < b.stats.avgKill)
+    return 1;
+  else
+    return 0;
+}
+
+function compareDeath(a, b) {
+  if (a.stats.avgDeath > b.stats.avgDeath)
+    return -1;
+  else if (a.stats.avgDeath < b.stats.avgDeath)
+    return 1;
+  else
+    return 0;
+}
+
+function compareAssist(a, b) {
+  if (a.stats.avgAssist > b.stats.avgAssist)
+    return -1;
+  else if (a.stats.avgAssist < b.stats.avgAssist)
+    return 1;
+  else
+    return 0;
+}
+
+function compareKDA(a, b) {
+  if (a.stats.avgKDA > b.stats.avgKDA)
+    return -1;
+  else if (a.stats.avgKDA < b.stats.avgKDA)
+    return 1;
+  else
+    return 0;
+}
+
+function compareCS(a, b) {
+  if (a.stats.avgCS > b.stats.avgCS)
+    return -1;
+  else if (a.stats.avgCS < b.stats.avgCS)
+    return 1;
+  else
+    return 0;
+}
+
+function compareGold(a, b) {
+  if (a.stats.avgGold > b.stats.avgGold)
+    return -1;
+  else if (a.stats.avgGold < b.stats.avgGold)
     return 1;
   else
     return 0;

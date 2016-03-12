@@ -2,6 +2,7 @@ angular.module('App', [
     'ui.router',
     'ui.bootstrap',
     'ngStorage',
+    'angularSpinner',
     'homeFactory',
     'summonerFactory'
   ])
