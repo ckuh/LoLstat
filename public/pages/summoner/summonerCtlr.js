@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('SummonerController', function($location, $scope, $state, $localStorage, homeFactory) {
+  .controller('SummonerController', function($location, $scope, $state, $localStorage, homeFactory, summonerFactory) {
     var vm = this;
     vm.socket = io();
     vm.summoner = {};
@@ -42,17 +42,17 @@ angular.module('App')
 
     vm.seasonPick = function(choice) {
       angular.forEach(vm.seasonShort, function(value, key) {
-        if(key === choice){
+        if (key === choice) {
           vm.seasonShort[key] = 'active';
-        }else{
+        } else {
           vm.seasonShort[key] = '';
         }
       });
 
       var result = findSeason(choice, vm.seasonDisp, vm.season)
-      if(vm.summonerIGN.season === result){
+      if (vm.summonerIGN.season === result) {
         return
-      }else {
+      } else {
         vm.summonerIGN.season = result;
         vm.getUserStatsRanked();
       }
@@ -135,7 +135,22 @@ angular.module('App')
     vm.socket.on('statsRanked', function(data) {
       $scope.$apply(function() {
         console.log('statsRanked: ', data.champions);
-        vm.statRanked = data.champions;
+        angular.forEach(data.champions, function(champ, key, arr) {
+          if (champ.id === 0) {
+            vm.totalWin = key;
+          }else{
+            champ.name = vm.championList[champ.id].name;
+            champ.stats.avgWin = (Math.round((champ.stats.totalSessionsWon / champ.stats.totalSessionsPlayed) * 100));
+            champ.stats.avgKill = (Math.round((champ.stats.totalChampionKills / champ.stats.totalSessionsPlayed) * 100) / 100);
+            champ.stats.avgDeath = (Math.round((champ.stats.totalDeathsPerSession / champ.stats.totalSessionsPlayed) * 100) / 100);
+            champ.stats.avgAssist = (Math.round((champ.stats.totalAssists / champ.stats.totalSessionsPlayed) * 100) / 100);
+            champ.stats.avgKDA = (Math.round(((champ.stats.totalChampionKills + champ.stats.totalAssists) / champ.stats.totalDeathsPerSession) * 100) / 100);
+            champ.stats.avgCS = (Math.floor((champ.stats.totalMinionKills / champ.stats.totalSessionsPlayed)));
+            champ.stats.avgGold = (Math.floor((champ.stats.totalGoldEarned / champ.stats.totalSessionsPlayed)));
+          }
+        });
+        data.champions.splice(vm.totalWin, 1);
+        vm.statRanked = data.champions.sort(compare);;
       })
     })
 
@@ -212,4 +227,13 @@ function findSeason(choice, seasonDisp, season) {
     result = season[3];
   }
   return result;
+}
+
+function compare(a, b) {
+  if (a.name < b.name)
+    return -1;
+  else if (a.name > b.name)
+    return 1;
+  else
+    return 0;
 }

@@ -2,7 +2,8 @@ angular.module('App', [
     'ui.router',
     'ui.bootstrap',
     'ngStorage',
-    'homeFactory'
+    'homeFactory',
+    'summonerFactory'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

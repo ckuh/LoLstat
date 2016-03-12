@@ -3,8 +3,9 @@ body {
   font-family: arial, sans-serif;
   background-color: rgba(0, 0, 0, 0.08);
 }
-.active a{
+.active a {
   background-color: #ddd !important;
+  border-bottom-color: #ddd !important;
 }
 .nav {
   font-size: 20px;
@@ -82,16 +83,26 @@ body {
 }
 .statRanked {
   padding-top: 15px;
+  width: 420px;
 }
-.statRanked ul{
+.statRanked ul {
   font-size: 15px;
 }
-.champRankedInfo{
-  padding: 15px 0;
+.champRankedInfoTab {
+  padding: 15px;
   background-color: #ddd;
 }
-.champRankedInfo h1{
+.champRankedInfo {
+  background-color: #ddd;
+}
+.champRankedInfo h1 {
   margin-top: 0;
+}
+.uniqChamp {
+  padding-left: 0;
+}
+.uniqChamp li {
+  display: inline;
 }
 #region {
   min-width: 80px;
@@ -108,5 +119,8 @@ body {
   }
   .searchInput {
     width: 80%;
+  }
+  .statRanked {
+    width: inherit;
   }
 }
