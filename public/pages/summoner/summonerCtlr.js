@@ -177,7 +177,7 @@ angular.module('App')
         })
         $interval(function () {
           vm.getUserStatsRanked();
-        }, 800, 1);
+        }, 1500, 1);
       }
       if (data.champions) {
         $scope.$apply(function() {
