@@ -42,22 +42,25 @@
           <a role='presentation' ng-click='summonerController.seasonPick(season)'>{{season}}</a>
         </li>
       </ul>
+
       <div class='champRankedInfoTab' ng-show='summonerController.gameStats.ranked'>
-        <ul class='uniqChampTitle'>
-          <li class='title'>Champion</li>
-          <li class='title'>Played</li>
-          <li>Kill</li>
-          <li>Death</li>
-          <li>Assist</li>
-          <li>KDA</li>
-          <li>CS</li>
-          <li>Gold</li>
+        <ul class='uniqChampTitle' ng-show='!summonerController.spinner'>
+          <li class='title' ng-click='summonerController.sortName()'>Champion<span class="caret"></span>
+          </li>
+          <li class='title' ng-click='summonerController.sortGame()'>Played</li>
+          <li ng-click='summonerController.sortKill()'>Kill</li>
+          <li ng-click='summonerController.sortDeath()'>Death</li>
+          <li ng-click='summonerController.sortAssist()'>Assist</li>
+          <li ng-click='summonerController.sortKDA()'>KDA</li>
+          <li ng-click='summonerController.sortCS()'>CS</li>
+          <li ng-click='summonerController.sortGold()'>Gold</li>
         </ul>
 
         <div class='champRankedInfo' ng-repeat='userData in summonerController.statRanked'>
-          <ul class='uniqChamp'>
+          <ul class='uniqChamp' ng-show='!summonerController.spinner'>
             <li class='title'>
-              <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/champion/{{userData.key}}.png'/> {{userData.name}}
+              <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/champion/{{userData.key}}.png'/>
+              {{userData.name}}
             </li>
             <li class='title'>
               {{userData.stats.totalSessionsWon}}W/{{userData.stats.totalSessionsLost}}L
@@ -83,6 +86,11 @@
             </li>
           </ul>
         </div>
+
+        <div class='champRankedInfoContainer' ng-show='summonerController.spinner'>
+          <span us-spinner='{lines:17, length:0, width:15, radius:40, scale:0.50, corners:1.0, opacity:0.25, direction:1, speed:0.7, trail:100}' spinner-on='summonerController.spinner' ng-show='summonerController.gameStats.ranked'></span>
+        </div>
+
       </div>
 
     </div>
