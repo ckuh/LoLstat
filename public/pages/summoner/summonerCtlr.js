@@ -36,6 +36,7 @@ angular.module('App')
 
     vm.init = function() {
       vm.summonerIGN.name = $localStorage.summonerIGN;
+      vm.summonerIGN.region = $localStorage.summonerRegion.toLowerCase();
       vm.summonerIGN.season = vm.season[0];
       vm.getUserInfo();
       vm.getChampName();
@@ -76,7 +77,7 @@ angular.module('App')
     }
 
     vm.getUserInfo = function() {
-      vm.socket.emit('staticRealm', 'na');
+      vm.socket.emit('staticRealm', vm.summonerIGN.region);
       vm.socket.emit('summonerName', vm.summonerIGN.name);
       vm.socket.emit('summonerLeague', vm.summonerIGN.name);
     }
@@ -142,26 +143,28 @@ angular.module('App')
     })
 
     vm.socket.on('statsRanked', function(data) {
-      $scope.$apply(function() {
-        console.log('statsRanked: ', data.champions);
-        angular.forEach(data.champions, function(champ, key, arr) {
-          if (champ.id === 0) {
-            vm.totalWin = key;
-          }else{
-            champ.key = vm.championList[champ.id].key;
-            champ.name = vm.championList[champ.id].name;
-            champ.stats.avgWin = (Math.round((champ.stats.totalSessionsWon / champ.stats.totalSessionsPlayed) * 100));
-            champ.stats.avgKill = (Math.round((champ.stats.totalChampionKills / champ.stats.totalSessionsPlayed) * 100) / 100);
-            champ.stats.avgDeath = (Math.round((champ.stats.totalDeathsPerSession / champ.stats.totalSessionsPlayed) * 100) / 100);
-            champ.stats.avgAssist = (Math.round((champ.stats.totalAssists / champ.stats.totalSessionsPlayed) * 100) / 100);
-            champ.stats.avgKDA = (Math.round(((champ.stats.totalChampionKills + champ.stats.totalAssists) / champ.stats.totalDeathsPerSession) * 100) / 100);
-            champ.stats.avgCS = (Math.floor((champ.stats.totalMinionKills / champ.stats.totalSessionsPlayed)));
-            champ.stats.avgGold = (Math.floor((champ.stats.totalGoldEarned / champ.stats.totalSessionsPlayed)));
-          }
-        });
-        data.champions.splice(vm.totalWin, 1);
-        vm.statRanked = data.champions.sort(compare);;
-      })
+      if(data.champions) {
+        $scope.$apply(function() {
+          console.log('statsRanked: ', data.champions);
+          angular.forEach(data.champions, function(champ, key, arr) {
+            if (champ.id === 0) {
+              vm.totalWin = key;
+            }else{
+              champ.key = vm.championList[champ.id].key;
+              champ.name = vm.championList[champ.id].name;
+              champ.stats.avgWin = (Math.round((champ.stats.totalSessionsWon / champ.stats.totalSessionsPlayed) * 100));
+              champ.stats.avgKill = (Math.round((champ.stats.totalChampionKills / champ.stats.totalSessionsPlayed) * 100) / 100);
+              champ.stats.avgDeath = (Math.round((champ.stats.totalDeathsPerSession / champ.stats.totalSessionsPlayed) * 100) / 100);
+              champ.stats.avgAssist = (Math.round((champ.stats.totalAssists / champ.stats.totalSessionsPlayed) * 100) / 100);
+              champ.stats.avgKDA = (Math.round(((champ.stats.totalChampionKills + champ.stats.totalAssists) / champ.stats.totalDeathsPerSession) * 100) / 100);
+              champ.stats.avgCS = (Math.floor((champ.stats.totalMinionKills / champ.stats.totalSessionsPlayed)));
+              champ.stats.avgGold = (Math.floor((champ.stats.totalGoldEarned / champ.stats.totalSessionsPlayed)));
+            }
+          });
+          data.champions.splice(vm.totalWin, 1);
+          vm.statRanked = data.champions.sort(compare);;
+        })
+      }
     })
 
     vm.init();

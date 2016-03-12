@@ -31,7 +31,7 @@
                 {{homeController.summoner.region}}
               </button>
 
-              <ul id="region" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <ul id="regionUl" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                 <li ng-repeat="choice in homeController.regionList">
                   <a href ng-click='homeController.summoner.region = choice'>{{choice}}</a>
                 </li>

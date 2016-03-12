@@ -3,9 +3,6 @@ var api_key = "96624161-8f6a-4faf-b080-642f348b4748";
 
 riot.developerKey = api_key;
 
-riot.settings = {
-  region: 'na'
-}
 module.exports = {
   riot: riot
 };

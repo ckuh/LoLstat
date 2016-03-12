@@ -11,6 +11,10 @@ module.exports = function(io) {
     });
 
     socket.on('staticRealm', function(region) {
+      riot.settings = {
+        region: region,
+        global: 'global'
+      }
       getStaticDataHelper.realm(riot, region, function(data) {
         io.emit('staticRealm', data)
       })

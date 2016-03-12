@@ -127,6 +127,10 @@ body {
   min-width: 80px;
   text-align: center;
 }
+#regionUl{
+  min-width: 80px !important;
+  text-align: center !important;
+}
 @media (min-width: 430px) {
   .gameStatsHold {
     width: 100%;

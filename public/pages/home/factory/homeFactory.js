@@ -6,6 +6,7 @@ angular.module('homeFactory', [])
     return service;
 
     function saveSummonerIGN(summonerIGN) {
-      $localStorage.summonerIGN = summonerIGN;
+      $localStorage.summonerIGN = summonerIGN.IGN;
+      $localStorage.summonerRegion = summonerIGN.region;;
     }
   })
