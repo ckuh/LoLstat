@@ -87,6 +87,9 @@ body {
 .champRankedInfoContainer {
   height: 100px;
   background-color: #fff !important;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   position: relative;
 }
 .champRankedInfoTab {
@@ -96,7 +99,7 @@ body {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background: #fff;
+  background-color: #fff !important;
 }
 .champRankedInfo {
   background-color: #ddd;
