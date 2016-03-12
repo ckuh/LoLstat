@@ -29,7 +29,7 @@ module.exports = {
   },
 
   statsSummary: function(riot, userName, callback) {
-    console.log('+++line3 userName: ', userName);
+    console.log('+++line32 userName: ', userName);
     getSummonerInfo(riot, userName, function(err, summonerInfo) {
       if (err) {
         console.error('+++line 35:', err);
@@ -69,10 +69,9 @@ module.exports = {
 }
 
 function getSummonerInfo(riot, userName, callback) {
-  console.log(userName);
   riot.summoner.byName(userName, {}, function(err, data) {
     if (err) {
-      console.error('+++line 75:', err);
+      console.error('+++line 74:', err);
       callback(err, JSON.parse(data).status);
     } else {
       callback(err, data[userName]);

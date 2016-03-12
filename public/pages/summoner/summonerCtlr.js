@@ -104,7 +104,6 @@ angular.module('App')
 
     vm.socket.on('staticRealm', function(data) {
       $scope.$apply(function() {
-        console.log('staticRealm: ', data);
         vm.realm = data;
       })
     })
@@ -113,7 +112,6 @@ angular.module('App')
       $scope.$apply(function() {
         if (data.name) {
           vm.summoner = data;
-          console.log(data);
         } else {
           $state.go('home');
         }
@@ -123,12 +121,10 @@ angular.module('App')
     vm.socket.on('summonerLeague', function(data) {
       $scope.$apply(function() {
         vm.summoner.ranked = data;
-        console.log(vm.summoner);
       })
     })
 
     vm.socket.on('champName', function(data) {
-      console.log('championList: ', data);
       $scope.$apply(function() {
         for (var key in data) {
           vm.championList[data[key].id] = data[key];
@@ -145,7 +141,6 @@ angular.module('App')
     vm.socket.on('statsRanked', function(data) {
       if(data.champions) {
         $scope.$apply(function() {
-          console.log('statsRanked: ', data.champions);
           angular.forEach(data.champions, function(champ, key, arr) {
             if (champ.id === 0) {
               vm.totalWin = key;
