@@ -123,6 +123,7 @@ body {
   width: 20% !important;
 }
 #region {
+  top: -3px;
   min-width: 80px;
   text-align: center;
 }
