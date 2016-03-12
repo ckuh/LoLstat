@@ -1,5 +1,6 @@
 var getUserDataHelper = require('./helperFunc/getUserDataHelper');
 var getChampDataHelper = require('./helperFunc/getChampDataHelper');
+var getStaticDataHelper = require('./helperFunc/getStaticDataHelper');
 var riot = require('./config.js').riot;
 
 module.exports = function(io) {
@@ -9,6 +10,11 @@ module.exports = function(io) {
       io.emit('user left')
     });
 
+    socket.on('staticRealm', function(region) {
+      getStaticDataHelper.realm(riot, region, function(data) {
+        io.emit('staticRealm', data)
+      })
+    })
     socket.on('summonerName', function(userName) {
       getUserDataHelper.summonerName(riot, setUserName(userName), function(data) {
         io.emit('summonerName', data);

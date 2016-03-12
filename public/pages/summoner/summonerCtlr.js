@@ -2,6 +2,7 @@ angular.module('App')
   .controller('SummonerController', function($location, $scope, $state, $localStorage, homeFactory, summonerFactory) {
     var vm = this;
     vm.socket = io();
+    vm.realm = {};
     vm.summoner = {};
     vm.statSummary = {};
     vm.statRanked = {};
@@ -75,6 +76,7 @@ angular.module('App')
     }
 
     vm.getUserInfo = function() {
+      vm.socket.emit('staticRealm', 'na');
       vm.socket.emit('summonerName', vm.summonerIGN.name);
       vm.socket.emit('summonerLeague', vm.summonerIGN.name);
     }
@@ -98,6 +100,13 @@ angular.module('App')
         reload: true
       });
     }
+
+    vm.socket.on('staticRealm', function(data) {
+      $scope.$apply(function() {
+        console.log('staticRealm: ', data);
+        vm.realm = data;
+      })
+    })
 
     vm.socket.on('summonerName', function(data) {
       $scope.$apply(function() {
@@ -139,6 +148,7 @@ angular.module('App')
           if (champ.id === 0) {
             vm.totalWin = key;
           }else{
+            champ.key = vm.championList[champ.id].key;
             champ.name = vm.championList[champ.id].name;
             champ.stats.avgWin = (Math.round((champ.stats.totalSessionsWon / champ.stats.totalSessionsPlayed) * 100));
             champ.stats.avgKill = (Math.round((champ.stats.totalChampionKills / champ.stats.totalSessionsPlayed) * 100) / 100);

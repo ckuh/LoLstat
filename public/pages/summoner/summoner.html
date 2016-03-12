@@ -5,7 +5,7 @@
     <div class='container-fluid summonerName'>
       <div class="summonerImgHolder">
         <div class="summonerImg">
-          <img ng-src='https://ddragon.leagueoflegends.com/cdn/6.5.1/img/profileicon/{{summonerController.summoner.profileIconId}}.png'/>
+          <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/profileicon/{{summonerController.summoner.profileIconId}}.png'/>
           <span>{{summonerController.summoner.summonerLevel}}</span>
         </div>
       </div>
@@ -43,39 +43,23 @@
         </li>
       </ul>
       <div class='champRankedInfoTab' ng-show='summonerController.gameStats.ranked'>
-        <ul class='uniqChamp nav-justified'>
-          <li>
-            Champion
-          </li>
-          <li>
-            Played
-          </li>
-          <li>
-            Kill
-          </li>
-          <li>
-            Death
-          </li>
-          <li>
-            Assist
-          </li>
-          <li>
-            KDA
-          </li>
-          <li>
-            CS
-          </li>
-          <li>
-            Gold
-          </li>
+        <ul class='uniqChampTitle'>
+          <li class='title'>Champion</li>
+          <li class='title'>Played</li>
+          <li>Kill</li>
+          <li>Death</li>
+          <li>Assist</li>
+          <li>KDA</li>
+          <li>CS</li>
+          <li>Gold</li>
         </ul>
 
         <div class='champRankedInfo' ng-repeat='userData in summonerController.statRanked'>
-          <ul class='uniqChamp nav-justified'>
-            <li>
-              {{userData.name}}
+          <ul class='uniqChamp'>
+            <li class='title'>
+              <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/champion/{{userData.key}}.png'/> {{userData.name}}
             </li>
-            <li>
+            <li class='title'>
               {{userData.stats.totalSessionsWon}}W/{{userData.stats.totalSessionsLost}}L
               {{userData.stats.avgWin}}%
             </li>
