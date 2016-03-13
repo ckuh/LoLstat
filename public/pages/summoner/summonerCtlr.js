@@ -40,7 +40,6 @@ angular.module('App')
       vm.summonerIGN.region = $localStorage.summonerRegion.toLowerCase();
       vm.summonerIGN.season = vm.season[0];
       vm.getUserInfo();
-      vm.getChampName();
     }
 
     vm.seasonPick = function(choice) {
@@ -57,7 +56,10 @@ angular.module('App')
         return
       } else {
         vm.summonerIGN.season = result;
-        vm.getUserStatsRanked();
+        vm.spinner = true;
+        $interval(function () {
+          vm.getUserStatsRanked();
+        }, 2000, 1);
       }
     }
 
@@ -78,9 +80,18 @@ angular.module('App')
     }
 
     vm.getUserInfo = function() {
-      vm.socket.emit('staticRealm', vm.summonerIGN.region);
-      vm.socket.emit('summonerName', vm.summonerIGN.name);
-      vm.socket.emit('summonerLeague', vm.summonerIGN.name);
+      $interval(function () {
+        vm.socket.emit('staticRealm', vm.summonerIGN.region);
+        $interval(function () {
+          vm.socket.emit('summonerName', vm.summonerIGN.name);
+          $interval(function () {
+            vm.socket.emit('summonerLeague', vm.summonerIGN.name);
+            $interval(function () {
+              vm.getChampName();
+            }, 1000, 1);
+          }, 1000, 1);
+        }, 1000, 1);
+      }, 1000, 1);
     }
 
     vm.getChampName = function() {
@@ -175,9 +186,6 @@ angular.module('App')
         $scope.$apply(function() {
           vm.spinner = true;
         })
-        $interval(function () {
-          vm.getUserStatsRanked();
-        }, 1500, 1);
       }
       if (data.champions) {
         $scope.$apply(function() {
