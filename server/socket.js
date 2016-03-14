@@ -2,17 +2,9 @@ var getUserDataHelper = require('./helperFunc/getUserDataHelper');
 var getChampDataHelper = require('./helperFunc/getChampDataHelper');
 var getStaticDataHelper = require('./helperFunc/getStaticDataHelper');
 var riot = require('./config.js').riot;
-var secret = require('./config.js').secret;
-var jwt = require('jwt-simple');
-var bcrypt = require('bcrypt');
 
 module.exports = function(io) {
   io.on('connection', function(socket) {
-    console.log(socket.id);
-    // genSocketId(function(id){
-    //   socket.join(id);
-    //   io.emit('roomJoin', id);
-    // })
 
     socket.on('disconnect', function() {
       io.emit('user left')
@@ -71,5 +63,6 @@ function genSocketId(callback) {
 
 function setUserName(userName) {
   userName = userName.split(' ').join('');
+  userName = userName.replace(/[^a-zA-Z0-9]/g, '');
   return userName.toLowerCase();
 }

@@ -19,34 +19,13 @@
     <script src="./pages/home/factory/homeFactory.js"></script>
     <script src="./pages/summoner/summonerCtlr.js"></script>
     <script src="./pages/summoner/factory/summonerFactory.js"></script>
+    <script src="./pages/summoner/controller/searchCtlr.js"></script>
   </head>
 
   <body ng-app="App">
-    <div ng-controller='HomeController as homeController'>
-
-      <div class='container-fluid top'>
-        <h1>LolStat</h1>
-        <form class='searchInput' ng-submit='homeController.saveSummonerIGN()'>
-          <div class="container-fluid">
-            <div class="btn-group" uib-dropdown is-open="status.isopen">
-              <button id="region" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                {{homeController.summoner.region}}
-              </button>
-
-              <ul id="regionUl" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li ng-repeat="choice in homeController.regionList">
-                  <a href ng-click='homeController.summoner.region = choice'>{{choice}}</a>
-                </li>
-              </ul>
-            </div>
-            <input class='searchBar' ng-model='homeController.summoner.IGN' placeholder="Enter the Summoner's name"/>
-          </div>
-        </form>
-      </div>
-
-    </div>
 
     <ui-view></ui-view>
+
   </body>
 
 </html>
