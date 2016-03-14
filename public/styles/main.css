@@ -176,4 +176,7 @@ body {
   .statRanked {
     width: inherit;
   }
+  .homeSearchInfo {
+    padding-top: 300px;
+  }
 }
