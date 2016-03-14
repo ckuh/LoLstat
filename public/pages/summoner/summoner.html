@@ -1,7 +1,8 @@
 <div ng-controller='SearchController as searchController'>
 
   <div class='container-fluid top'>
-    <h1>LolStat</h1>
+    <h1 class='homeNav' ui-sref='home'>LolStat</h1>
+
     <form class='searchInput' ng-submit='searchController.saveSummonerIGN()'>
       <div class="container-fluid">
         <div class="btn-group" uib-dropdown is-open="status.isopen">
@@ -41,7 +42,7 @@
         </div>
       </div>
       <div>
-        <ul class='nav nav-tabs'>
+        <ul class='nav nav-tabs optionTab'>
           <li ng-repeat='choice in summonerController.statChoice'>
             <a role='presentation' ng-click='summonerController.statPick(choice)'>{{choice}}</a>
           </li>
@@ -59,7 +60,7 @@
       </div>
 
       <div class='container-fluid statRanked'>
-        <ul class='nav nav-tabs nav-justified' ng-show='summonerController.gameStats.ranked'>
+        <ul class='nav nav-tabs nav-justified optionTab' ng-show='summonerController.gameStats.ranked'>
           <li ng-repeat='(key, season) in summonerController.seasonDisp' ng-class='summonerController.seasonShort[season]'>
             <a role='presentation' ng-click='summonerController.seasonPick(season)'>{{season}}</a>
           </li>
@@ -69,13 +70,13 @@
           <ul class='uniqChampTitle' ng-show='!summonerController.spinner'>
             <li class='title' ng-click='summonerController.sortName()'>Champion<span class="caret"></span>
             </li>
-            <li class='title' ng-click='summonerController.sortGame()'>Played</li>
-            <li ng-click='summonerController.sortKill()'>Kill</li>
-            <li ng-click='summonerController.sortDeath()'>Death</li>
-            <li ng-click='summonerController.sortAssist()'>Assist</li>
-            <li ng-click='summonerController.sortKDA()'>KDA</li>
-            <li ng-click='summonerController.sortCS()'>CS</li>
-            <li ng-click='summonerController.sortGold()'>Gold</li>
+            <li class='title' ng-click='summonerController.sortGame()'>Played<span class="caret"></span></li>
+            <li ng-click='summonerController.sortKill()'>Kill<span class="caret"></span></li>
+            <li ng-click='summonerController.sortDeath()'>Death<span class="caret"></span></li>
+            <li ng-click='summonerController.sortAssist()'>Assist<span class="caret"></span></li>
+            <li ng-click='summonerController.sortKDA()'>KDA<span class="caret"></span></li>
+            <li ng-click='summonerController.sortCS()'>CS<span class="caret"></span></li>
+            <li ng-click='summonerController.sortGold()'>Gold<span class="caret"></span></li>
           </ul>
 
           <div class='champRankedInfoContainer' ng-show='!summonerController.spinner'>

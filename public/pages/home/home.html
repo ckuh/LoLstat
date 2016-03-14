@@ -1,23 +1,27 @@
 <div ng-controller='HomeController as homeController'>
 
-  <div class='container-fluid top'>
-    <h1>LolStat</h1>
-    <form class='searchInput' ng-submit='homeController.saveSummonerIGN()'>
-      <div class="container-fluid">
-        <div class="btn-group" uib-dropdown is-open="status.isopen">
-          <button id="region" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-            {{homeController.summoner.region}}
-          </button>
+  <div class='container-fluid homeSearch'>
 
-          <ul id="regionUl" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-            <li ng-repeat="choice in homeController.regionList">
-              <a href ng-click='homeController.summoner.region = choice'>{{choice}}</a>
-            </li>
-          </ul>
+    <div class="homeSearchInfo">
+      <h1>LolStat</h1>
+      <form class='searchInput' ng-submit='homeController.saveSummonerIGN()'>
+        <div class="container-fluid">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button id="region" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{homeController.summoner.region}}
+            </button>
+
+            <ul id="regionUl" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li ng-repeat="choice in homeController.regionList">
+                <a href ng-click='homeController.summoner.region = choice'>{{choice}}</a>
+              </li>
+            </ul>
+          </div>
+          <input class='searchBar' ng-model='homeController.summoner.IGN' placeholder="Enter the Summoner's name"/>
         </div>
-        <input class='searchBar' ng-model='homeController.summoner.IGN' placeholder="Enter the Summoner's name"/>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </div>
 
 </div>

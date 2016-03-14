@@ -7,8 +7,25 @@ body {
   background-color: #ddd !important;
   border-bottom-color: #ddd !important;
 }
-.nav {
-  font-size: 20px;
+.homeSearch {
+  height:100vh;
+  background-color: #229ee4;
+}
+.homeSearch h1 {
+  color: white;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-shadow: 3px 4px 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+.homeSearchInfo {
+  padding-top: 35%;
+}
+.homeNav {
+  cursor: pointer;
+}
+.optionTab li{
+  cursor: pointer;
 }
 .top {
   width: 490px;
