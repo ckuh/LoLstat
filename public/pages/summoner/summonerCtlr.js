@@ -3,6 +3,7 @@ angular.module('App')
     var vm = this;
     vm.socket = io();
     vm.spinner = true;
+    vm.dataLoad = false;
     vm.realm = {};
     vm.summoner = {};
     vm.statSummary = {};
@@ -172,6 +173,7 @@ angular.module('App')
         for (var key in data) {
           vm.championList[data[key].id] = data[key];
         }
+        vm.dataLoad = true;
       })
     })
 

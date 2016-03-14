@@ -1,6 +1,6 @@
 <div ng-controller='SummonerController as summonerController'>
 
-  <div class='container-fluid gameStatsHold'>
+  <div class='container-fluid gameStatsHold' ng-show='summonerController.dataLoad'>
 
     <div class='container-fluid summonerName'>
       <div class="summonerImgHolder">
@@ -56,45 +56,51 @@
           <li ng-click='summonerController.sortGold()'>Gold</li>
         </ul>
 
-        <div class='champRankedInfo' ng-repeat='userData in summonerController.statRanked'>
-          <ul class='uniqChamp' ng-show='!summonerController.spinner'>
-            <li class='title'>
-              <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/champion/{{userData.key}}.png'/>
-              {{userData.name}}
-            </li>
-            <li class='title'>
-              {{userData.stats.totalSessionsWon}}W/{{userData.stats.totalSessionsLost}}L
-              {{userData.stats.avgWin}}%
-            </li>
-            <li>
-              {{userData.stats.avgKill}}
-            </li>
-            <li>
-              {{userData.stats.avgDeath}}
-            </li>
-            <li>
-              {{userData.stats.avgAssist}}
-            </li>
-            <li>
-              {{userData.stats.avgKDA}}
-            </li>
-            <li>
-              {{userData.stats.avgCS}}
-            </li>
-            <li>
-              {{userData.stats.avgGold}}
-            </li>
-          </ul>
+        <div class='champRankedInfoContainer' ng-show='!summonerController.spinner'>
+          <div class='champRankedInfo' ng-repeat='userData in summonerController.statRanked'>
+            <ul class='uniqChamp'>
+              <li class='title'>
+                <img ng-src='{{summonerController.realm.cdn}}/{{summonerController.realm.dd}}/img/champion/{{userData.key}}.png'/>
+                {{userData.name}}
+              </li>
+              <li class='title'>
+                {{userData.stats.totalSessionsWon}}W/{{userData.stats.totalSessionsLost}}L
+                {{userData.stats.avgWin}}%
+              </li>
+              <li>
+                {{userData.stats.avgKill}}
+              </li>
+              <li>
+                {{userData.stats.avgDeath}}
+              </li>
+              <li>
+                {{userData.stats.avgAssist}}
+              </li>
+              <li>
+                {{userData.stats.avgKDA}}
+              </li>
+              <li>
+                {{userData.stats.avgCS}}
+              </li>
+              <li>
+                {{userData.stats.avgGold}}
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div class='champRankedInfoContainer' ng-show='summonerController.spinner'>
-          <span us-spinner='{lines:17, length:0, width:15, radius:40, scale:0.50, corners:1.0, opacity:0.25, direction:1, speed:0.7, trail:100}' spinner-on='summonerController.spinner' ng-show='summonerController.gameStats.ranked'></span>
+        <div class='champRankedInfoSpinner' ng-show='summonerController.spinner'>
+          <span us-spinner spinner-theme="bigBlue" ng-show='summonerController.gameStats.ranked'></span>
         </div>
 
       </div>
 
     </div>
 
+  </div>
+
+  <div ng-show='!summonerController.dataLoad'>
+    <span us-spinner spinner-theme="bigBlue"></span>
   </div>
 
 </div>

@@ -84,18 +84,17 @@ body {
 .statRanked ul {
   font-size: 15px;
 }
-.champRankedInfoContainer {
+.champRankedInfoSpinner {
   height: 100px;
   background-color: #fff !important;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
+  border-top: 2px solid #ddd;
   position: relative;
 }
 .champRankedInfoTab {
   background-color: #ddd;
 }
-.champRankedInfoTab div:nth-child(even) {
+.champRankedInfoContainer div:nth-child(odd) {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
